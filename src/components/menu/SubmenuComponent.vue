@@ -22,7 +22,6 @@ const props = defineProps({
 
 const itemType = computed(() => props.submenu.itemType ?? "item");
 const addMenuItemVisible = ref(false);
-
 </script>
 
 <template>

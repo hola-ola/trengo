@@ -77,13 +77,13 @@ const close = function () {
     clickedApply.value = false;
   }
   reset();
-}
+};
+
 const popperStyle = {
   backgroundColor: "var(--background-color--background-secondary)",
   boxShadow: "none",
-  color: "var(--text-color--text-primary)"
-}
-
+  color: "var(--text-color--text-primary)",
+};
 </script>
 
 <template>
@@ -107,7 +107,7 @@ const popperStyle = {
         @change="addItem"
       >
         <template #append>
-          <el-button :disabled="newItemLabel?.length < 3" round>
+          <el-button :disabled="!newItemLabel || newItemLabel?.length < 3" round>
             <font-awesome-icon icon="fa-plus" @click="addItem" /> </el-button
         ></template>
       </el-input>
@@ -117,15 +117,11 @@ const popperStyle = {
         <VueDraggable ref="el" v-model="items">
           <li v-for="(item, index) in items" :key="index" class="popover__items__item">
             <span>
-              <font-awesome-icon
-                class="popover__items__item-icon drag-icon"
-                icon="fa-grip-vertical"
-                v-if="items && items.length > 1"
-              />
-              <font-awesome-icon class="popover__items__item-icon custom-icon" :icon="item.icon ?? 'fa-check'" />
+              <font-awesome-icon class="popover__icon" icon="fa-grip-vertical" v-if="items && items.length > 1" />
+              <font-awesome-icon class="popover__icon" :icon="item.icon ?? 'fa-check'" />
               {{ item.label }}
             </span>
-            <font-awesome-icon class="trash-icon" icon="fa-trash" @click="deleteItem(index)" />
+            <font-awesome-icon class="popover__icon" icon="fa-trash" @click="deleteItem(index)" />
           </li>
         </VueDraggable>
       </ul>
@@ -145,59 +141,39 @@ const popperStyle = {
 </template>
 
 <style scoped lang="scss">
+.popover__items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  padding: 0;
 
-.popover {
-  @media (max-width: 576px) {
-    width: 100%;
-    margin: 10px;
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+  }
+}
+.popover__icon {
+  margin-right: 10px;
+}
+
+.popover__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  .el-button--primary:hover {
+    background-color: var(--base-color-brand--blue-medium);
   }
 
-  &__items {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-    padding: 0;
-
-    &__item {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px;
-
-      .drag-icon {
-        cursor: pointer;
-        margin-right: 10px;
-      }
-
-      .custom-icon {
-        background-color: var(--base-color-brand--yellow-light);
-        padding: 6px 8px;
-        border-radius: 10px;
-        margin-right: 6px;
-        vertical-align: middle;
-      }
-
-      .trash-icon {
-        cursor: pointer;
-      }
+  .is-text {
+    color: var(--text-color--text-primary);
+    &:hover {
+      border: 1px solid var(--text-color--text-primary);
     }
-  }
-  &__buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    .el-button--primary:hover {
-      background-color: var(--base-color-brand--blue-medium);
-    }
-    .is-text {
-      color: var(--text-color--text-primary);
-    }
-    .is-text:hover {
-        border: solid var(--text-color--text-primary) 1px;
-    }
-
   }
 }
 </style>

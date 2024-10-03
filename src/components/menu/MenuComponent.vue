@@ -17,7 +17,7 @@ onMounted(async () => {
       <template v-for="(submenu, index) in menuStore.menu" :key="`submenu-${index}`">
         <SubmenuComponent :submenu="submenu" :index="index.toString()" />
       </template>
-      <MenuFooter text="Create conversation"/>
+      <MenuFooter text="Create conversation" />
     </template>
   </el-menu>
 </template>

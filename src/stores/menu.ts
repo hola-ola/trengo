@@ -80,6 +80,6 @@ export const useMenuStore = defineStore("menu", {
       if (submenuToUpdate) {
         submenuToUpdate.items = items;
       }
-    }
+    },
   },
 });

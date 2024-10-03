@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 const props = defineProps({
   icon: {
@@ -10,7 +10,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-})
+});
 </script>
 
 <template>
