@@ -27,7 +27,7 @@ const addMenuItemVisible = ref(false);
 <template>
   <el-sub-menu :index="index" class="submenu" :expand-close-icon="ChevronUp" :expand-open-icon="ChevronDown">
     <template #title>
-      <span class="title-container">
+      <span class="submenu__title-container">
         <span>
           {{ submenu.label }}
         </span>

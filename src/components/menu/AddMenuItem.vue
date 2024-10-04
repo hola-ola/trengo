@@ -117,11 +117,15 @@ const popperStyle = {
         <VueDraggable ref="el" v-model="items">
           <li v-for="(item, index) in items" :key="index" class="popover__items__item">
             <span>
-              <font-awesome-icon class="popover__icon" icon="fa-grip-vertical" v-if="items && items.length > 1" />
-              <font-awesome-icon class="popover__icon" :icon="item.icon ?? 'fa-check'" />
+              <font-awesome-icon
+                class="popover__items__item-icon"
+                icon="fa-grip-vertical"
+                v-if="items && items.length > 1"
+              />
+              <font-awesome-icon class="popover__items__item-icon" :icon="item.icon ?? 'fa-check'" />
               {{ item.label }}
             </span>
-            <font-awesome-icon class="popover__icon" icon="fa-trash" @click="deleteItem(index)" />
+            <font-awesome-icon class="popover__items__item-icon" icon="fa-trash" @click="deleteItem(index)" />
           </li>
         </VueDraggable>
       </ul>
@@ -142,38 +146,24 @@ const popperStyle = {
 
 <style scoped lang="scss">
 .popover__items {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 400px;
-  padding: 0;
+  @apply flex flex-col w-full px-2 list-none;
 
   &__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    cursor: pointer;
+    @apply flex flex-row justify-between items-center p-2 cursor-pointer;
+
+    &-icon {
+      @apply mr-2 cursor-pointer;
+    }
   }
 }
-.popover__icon {
-  margin-right: 10px;
-}
-
 .popover__buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-
+  @apply flex justify-end gap-2;
   .el-button--primary:hover {
-    background-color: var(--base-color-brand--blue-medium);
+    background-color: var(--background--background-blue);
   }
 
   .is-text {
-    color: var(--text-color--text-primary);
-    &:hover {
-      border: 1px solid var(--text-color--text-primary);
-    }
+    @apply text-gray-800 border border-transparent hover:border-gray-800;
   }
 }
 </style>

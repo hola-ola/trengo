@@ -1,0 +1,100 @@
+@import "base.css";
+
+body {
+  background-color: var(--background--background-blue);
+  color: var(--text-color--text-primary);
+  @apply text-base font-sans max-h-screen;
+  @apply md:py-4 md:px-8 sm:py-4 sm:px-0;
+
+  .el-menu {
+    &-item {
+      background-color: var(--background-color--background-secondary);
+      @apply gap-2;
+    }
+    & ul {
+      :hover {
+        background-color: var(--background-color--background-secondary);
+      }
+    }
+  }
+
+  .menu {
+    @apply absolute top-0 left-0 h-screen;
+    @apply flex flex-col overflow-auto border-r-0 pt-2;
+    @apply w-full md:w-72;
+    background-color: var(--background-color--background-secondary);
+  }
+
+  .submenu {
+    :hover {
+      background-color: var(--base-color-brand--purple);
+    }
+    &__title-container {
+      @apply flex justify-between w-full items-center pl-2;
+
+      .add-icon {
+        @apply flex cursor-pointer hover:p-1 hover:rounded-full;
+      }
+    }
+  }
+
+  .footer {
+    @apply absolute bottom-2 w-full flex flex-col text-base;
+    :hover {
+      background-color: var(--base-color-brand--purple);
+    }
+
+    & p {
+      border: var(--text-color--text-primary);
+      @apply border-2 border-solid;
+      @apply rounded-[20px] py-1.5 px-3 w-fit cursor-pointer my-20 mx-auto;
+    }
+
+    &__icon {
+      @apply mr-3;
+    }
+  }
+
+  .message-info {
+    background-color: var(--base-color-brand--purple);
+    border: var(--base-color-brand--purple);
+    .el-message__content {
+      color: var(--text-color--text-primary);
+    }
+    .el-icon {
+      color: var(--text-color--text-primary);
+    }
+  }
+
+  .message-success {
+    background-color: var(--base-color-brand--green-light);
+    border: var(--base-color-brand--green-light);
+    .el-message__content {
+      color: var(--text-color--text-success);
+    }
+    .el-icon {
+      color: var(--text-color--text-success);
+    }
+  }
+
+  .el-button--primary {
+    background-color: var(--base-color-brand--blue-light);
+    @apply border-none;
+  }
+
+  .el-divider {
+    @apply my-3 mx-0;
+  }
+
+  .skeleton {
+    @apply flex flex-col gap-8 px-16 py-8;
+
+    &__grid {
+      @apply grid grid-cols-2 gap-4;
+
+      &__item {
+        @apply w-full h-40 rounded-lg mt-4;
+      }
+    }
+  }
+}

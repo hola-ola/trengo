@@ -15,6 +15,6 @@ const props = defineProps({
 
 <template>
   <div class="footer">
-    <p><font-awesome-icon :icon="props.icon" class="footer-icon" />{{ props.text }}</p>
+    <p><font-awesome-icon :icon="props.icon" class="footer__icon" />{{ props.text }}</p>
   </div>
 </template>
