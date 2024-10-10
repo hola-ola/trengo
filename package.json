@@ -20,6 +20,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/vue-fontawesome": "^3.0.8",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/vue": "^8.1.0",
     "element-plus": "^2.8.4",
     "pinia": "^2.1.7",
     "sass": "^1.79.4",

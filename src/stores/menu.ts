@@ -28,8 +28,10 @@ export const useMenuStore = defineStore("menu", {
      * Function to fetch menu configuration data from the external source
      */
     fetchMenu: async function () {
+      const baseURL = import.meta.env.VITE_BASE_URL || window.location.origin;
+
       this.menu = await axios
-        .get("http://localhost:5173/src/data/menuData.json", { baseURL: window.location.origin })
+        .get(`${baseURL}/src/data/menuData.json`)
         .then((response: AxiosResponse) => {
           return response.data;
         })
