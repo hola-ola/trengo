@@ -3,50 +3,39 @@ import { ref } from "vue";
 import { ElMessage } from "element-plus";
 import { VueDraggable } from "vue-draggable-plus";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import type { MenuItem } from "@/utils/GeneralInterfaces";
 import { DefaultPopover } from "@/utils/GeneralConstants";
+import type { MenuItem } from "@/utils/GeneralInterfaces";
 
 import { useMenuStore } from "@/stores/menu";
 const menuStore = useMenuStore();
 
-const props = defineProps({
-  placement: {
-    type: String,
-    default: DefaultPopover.PLACEMENT,
-  },
-  width: {
-    type: Number,
-    default: DefaultPopover.WIDTH,
-  },
-  show: {
-    type: Boolean,
-    default: false,
-  },
-  submenuId: {
-    type: String,
-    required: true,
-  },
-});
+interface AddMenuItemProps {
+  placement?: string;
+  width?: number;
+  show: boolean;
+  submenuId: string;
+}
+const props = defineProps<AddMenuItemProps>();
 
 const visible = ref<boolean>(props.show);
 const newItemLabel = ref<string>("");
-const itemType = menuStore.submenuItemType(props.submenuId) ?? "item";
 const items = ref<MenuItem[]>(menuStore.submenuItems(props.submenuId));
+const itemType: string = menuStore.submenuItemType(props.submenuId) ?? "item";
 
-const addItem = function () {
+const addItem = function (): void {
   menuStore.addMenuItem(props.submenuId, newItemLabel.value);
   items.value = menuStore.submenuItems(props.submenuId);
   newItemLabel.value = "";
 };
 
-const deleteItem = function (index: number) {
+const deleteItem = function (index: number): void {
   menuStore.deleteMenuItem(props.submenuId, index);
   items.value = menuStore.submenuItems(props.submenuId);
 };
 
-const clickedApply = ref(false);
+const clickedApply = ref<boolean>(false);
 
-const applyChanges = function () {
+const applyChanges = function (): void {
   clickedApply.value = true;
   menuStore.updateSubmenuItemsOrder(props.submenuId, items.value);
   ElMessage({
@@ -57,7 +46,7 @@ const applyChanges = function () {
   reset();
 };
 
-const cancelChanges = function () {
+const cancelChanges = function (): void {
   items.value = menuStore.submenuItems(props.submenuId);
   ElMessage({
     message: "Your changes have been cancelled",
@@ -66,12 +55,12 @@ const cancelChanges = function () {
   reset();
 };
 
-const reset = function () {
+const reset = function (): void {
   visible.value = false;
   newItemLabel.value = "";
 };
 
-const close = function () {
+const close = function (): void {
   if (!clickedApply.value) {
     items.value = menuStore.submenuItems(props.submenuId);
     clickedApply.value = false;
@@ -79,7 +68,13 @@ const close = function () {
   reset();
 };
 
-const popperStyle = {
+interface PopperStyle {
+  backgroundColor: string;
+  boxShadow: string;
+  color: string;
+}
+
+const popperStyle: PopperStyle = {
   backgroundColor: "var(--background-color--background-secondary)",
   boxShadow: "none",
   color: "var(--text-color--text-primary)",
@@ -89,8 +84,8 @@ const popperStyle = {
 <template>
   <el-popover
     v-model:visible="visible"
-    :placement="DefaultPopover.PLACEMENT"
-    :width="width"
+    :placement="placement ?? DefaultPopover.PLACEMENT"
+    :width="width ?? DefaultPopover.WIDTH"
     trigger="click"
     :show-arrow="false"
     :popper-style="popperStyle"

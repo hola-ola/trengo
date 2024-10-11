@@ -1,24 +1,18 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
-import type { PropType } from "vue";
 import type { Submenu } from "@/utils/GeneralInterfaces";
 
 import ChevronUp from "@/components/icons/ChevronUp.vue";
 import ChevronDown from "@/components/icons/ChevronDown.vue";
 import AddMenuItem from "@/components/menu/AddMenuItem.vue";
 
-const props = defineProps({
-  submenu: {
-    type: Object as PropType<Submenu>,
-    required: true,
-  },
-  index: {
-    type: String,
-    required: true,
-  },
-});
+interface SubmenuComponentProps {
+  submenu: Submenu,
+  index: string,
+}
+
+const props = defineProps<SubmenuComponentProps>();
 
 const itemType = computed(() => props.submenu.itemType ?? "item");
 const addMenuItemVisible = ref(false);
