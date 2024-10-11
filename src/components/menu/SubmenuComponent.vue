@@ -8,8 +8,8 @@ import ChevronDown from "@/components/icons/ChevronDown.vue";
 import AddMenuItem from "@/components/menu/AddMenuItem.vue";
 
 interface SubmenuComponentProps {
-  submenu: Submenu,
-  index: string,
+  submenu: Submenu;
+  index: string;
 }
 
 const props = defineProps<SubmenuComponentProps>();

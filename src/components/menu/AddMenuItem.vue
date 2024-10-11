@@ -19,13 +19,26 @@ const props = defineProps<AddMenuItemProps>();
 
 const visible = ref<boolean>(props.show);
 const newItemLabel = ref<string>("");
-const items = ref<MenuItem[]>([... menuStore.submenuItems(props.submenuId)]);
+const items = ref<MenuItem[]>([...menuStore.submenuItems(props.submenuId)]);
 const itemType: string = menuStore.submenuItemType(props.submenuId) ?? "item";
 
 const addItem = function (): void {
-  menuStore.addMenuItem(props.submenuId, newItemLabel.value);
-  items.value = menuStore.submenuItems(props.submenuId);
-  newItemLabel.value = "";
+  const labelLength = newItemLabel.value?.trim()?.length;
+  if (labelLength === 0) {
+    ElMessage({
+      message: "Item's label can't be empty",
+      type: "warning",
+    });
+  } else if (labelLength < 3) {
+    ElMessage({
+      message: "Item's label needs to consist of minimum three characters",
+      type: "warning",
+    });
+  } else {
+    menuStore.addMenuItem(props.submenuId, newItemLabel.value);
+    items.value = menuStore.submenuItems(props.submenuId);
+    newItemLabel.value = "";
+  }
 };
 
 const deleteItem = function (index: number): void {
@@ -33,7 +46,7 @@ const deleteItem = function (index: number): void {
     console.error("Incorrect input data");
   }
   if (items.value[index]) {
-    items.value.splice(index, 1)
+    items.value.splice(index, 1);
   }
 };
 

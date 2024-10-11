@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import type { AxiosResponse } from "axios";
 import { defineStore } from "pinia";
 import type { Submenu, MenuItem } from "@/utils/GeneralInterfaces";
-import { Icon } from "@/utils/GeneralConstants";
+import { getRandomIcon } from "@/utils/GeneralFunctions";
 
 interface MenuState {
   menu: Submenu[];
@@ -49,9 +49,10 @@ export const useMenuStore = defineStore("menu", {
       if (!submenuId || !itemLabel) {
         console.error("Incorrect input data");
       }
+
       const newItem: MenuItem = {
         label: itemLabel,
-        icon: Icon.DEFAULT,
+        icon: getRandomIcon(),
       };
       const submenuIndex = this.submenuIndex(submenuId);
 
