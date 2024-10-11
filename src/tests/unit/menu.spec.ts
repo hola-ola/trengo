@@ -94,15 +94,4 @@ describe("Menu Store", () => {
     expect(menuStore.menu[subMenuIndex].items).toHaveLength(2);
     expect(menuStore.menu[subMenuIndex].items).toContainEqual(newItem);
   });
-
-  it("removes a specific menu item from items array of specific submenu", async () => {
-    mockFetchMenu();
-    await menuStore.fetchMenu();
-    const submenuId: string = "4";
-    const subMenuIndex: number = menuStore.submenuIndex(submenuId);
-
-    expect(menuStore.menu[subMenuIndex].items).toHaveLength(4);
-    menuStore.deleteMenuItem(submenuId, 0);
-    expect(menuStore.menu[subMenuIndex].items).toHaveLength(3);
-  });
 });

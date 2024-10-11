@@ -19,7 +19,7 @@ const props = defineProps<AddMenuItemProps>();
 
 const visible = ref<boolean>(props.show);
 const newItemLabel = ref<string>("");
-const items = ref<MenuItem[]>(menuStore.submenuItems(props.submenuId));
+const items = ref<MenuItem[]>([... menuStore.submenuItems(props.submenuId)]);
 const itemType: string = menuStore.submenuItemType(props.submenuId) ?? "item";
 
 const addItem = function (): void {
@@ -29,15 +29,19 @@ const addItem = function (): void {
 };
 
 const deleteItem = function (index: number): void {
-  menuStore.deleteMenuItem(props.submenuId, index);
-  items.value = menuStore.submenuItems(props.submenuId);
+  if (!index && index !== 0) {
+    console.error("Incorrect input data");
+  }
+  if (items.value[index]) {
+    items.value.splice(index, 1)
+  }
 };
 
 const clickedApply = ref<boolean>(false);
 
 const applyChanges = function (): void {
   clickedApply.value = true;
-  menuStore.updateSubmenuItemsOrder(props.submenuId, items.value);
+  menuStore.updateSubmenuItems(props.submenuId, items.value);
   ElMessage({
     message: "Your changes have been saved",
     type: "success",

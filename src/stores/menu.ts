@@ -64,20 +64,11 @@ export const useMenuStore = defineStore("menu", {
       }
     },
     /**
-     * Function to delete a menu item from a specified submenu
+     * Function to update the items of a given submenu with provided array of MenuItem
      * @param submenuId
-     * @param itemIndex
+     * @param items
      */
-    deleteMenuItem: function (submenuId: string, itemIndex: number) {
-      if (!submenuId || (!itemIndex && itemIndex !== 0)) {
-        console.error("Incorrect input data");
-      }
-      const submenuIndex = this.submenuIndex(submenuId);
-      if (this.menu && this.menu[submenuIndex]?.items?.length) {
-        this.menu[submenuIndex]?.items.splice(itemIndex, 1);
-      }
-    },
-    updateSubmenuItemsOrder: function (submenuId: string, items: MenuItem[]) {
+    updateSubmenuItems: function (submenuId: string, items: MenuItem[]) {
       const submenuToUpdate = this.menu.find((submenu) => submenu.id === submenuId);
       if (submenuToUpdate) {
         submenuToUpdate.items = items;

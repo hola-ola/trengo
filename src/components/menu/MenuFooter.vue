@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 interface MenuFooterProps {
-  icon: string;
+  icon?: string;
   text: string;
 }
 const props = defineProps<MenuFooterProps>();
