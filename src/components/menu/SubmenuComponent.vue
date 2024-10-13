@@ -28,7 +28,7 @@ const addMenuItemVisible = ref(false);
         <AddMenuItem :show="addMenuItemVisible" :submenu-id="submenu.id">
           <template #reference>
             <span class="add-icon" @click.stop="addMenuItemVisible = !addMenuItemVisible">
-              <el-tooltip class="box-item" effect="dark" :content="`Add ${itemType}`" placement="top">
+              <el-tooltip effect="dark" :content="`Add ${itemType}`" placement="top">
                 <font-awesome-icon icon="fa-plus" />
               </el-tooltip>
             </span>

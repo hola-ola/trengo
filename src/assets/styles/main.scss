@@ -27,13 +27,15 @@ body {
 
   .submenu {
     :hover {
-      background-color: var(--base-color-brand--purple);
+      background-color: var(--background-color--background-alternate);
+      @apply transition-none;
     }
     &__title-container {
       @apply flex justify-between w-full items-center pl-2;
 
+
       .add-icon {
-        @apply flex cursor-pointer hover:p-1 hover:rounded-full;
+        @apply flex cursor-pointer;
       }
     }
   }
@@ -41,7 +43,7 @@ body {
   .footer {
     @apply absolute bottom-2 w-full flex flex-col text-base;
     :hover {
-      background-color: var(--base-color-brand--purple);
+      background-color: var(--background-color--background-alternate);
     }
 
     & p {
@@ -55,9 +57,9 @@ body {
     }
   }
 
-  .message-info {
-    background-color: var(--base-color-brand--purple);
-    border: var(--base-color-brand--purple);
+  .message-success,
+  .message-info
+   {
     .el-message__content {
       color: var(--text-color--text-primary);
     }
@@ -67,14 +69,11 @@ body {
   }
 
   .message-success {
-    background-color: var(--base-color-brand--green-light);
-    border: var(--base-color-brand--green-light);
-    .el-message__content {
-      color: var(--text-color--text-success);
-    }
-    .el-icon {
-      color: var(--text-color--text-success);
-    }
+    background-color: var(--base-color-system--success-green);
+  }
+
+  .message-info {
+    background-color: var(--background-color--background-alternate);
   }
 
   .el-button--primary {
